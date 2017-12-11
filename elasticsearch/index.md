@@ -1,3 +1,4 @@
+### ES6.0
 1. [入门](1/index.md)
 2. 搭建Elasticsearch
 3. 升级Elasticsearch
