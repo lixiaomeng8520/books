@@ -7,3 +7,5 @@
 6. [sublime](sublime/index.md)
 7. [docker](docker/index.md)
 8. [代码书写规范](code/index.md)
+9. [linux](linux/index.md)
+10. [ai](ai/index.md)
