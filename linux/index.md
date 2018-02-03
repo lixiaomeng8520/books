@@ -37,16 +37,18 @@ nmcli, 一个设备可以对应多个连接
 |启动static连接|nmcli c up static|
 |关闭static连接|nmcli c down static|
 
-***
-
-### natstat命令
+natstat命令
 1. netstat -a ()
 
-
+***
 
 ### 安装仓库
-1. yum -y install epel-release (epel)
-2. yum -y install https://centos7.iuscommunity.org/ius-release.rpm (ius)
+|描述|命令|
+|----|----|
+|epel|yum -y install epel-release|
+|ius |yum -y install https://centos7.iuscommunity.org/ius-release.rpm|
+
+***
 
 ### 软件包
 1. rpm -q php71u (查询php71u是否安装)
