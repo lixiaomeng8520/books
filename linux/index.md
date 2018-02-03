@@ -51,7 +51,9 @@ natstat命令
 ***
 
 ### 软件包
-1. rpm -q php71u (查询php71u是否安装)
-2. rpm -qi php71u (查看php71u包信息)
-3. rpm -ql php71u (列出php71u包含的文件)
-4. rpm -qf filename (查看filename属于哪个rpm包)
+|描述|命令|
+|----|----|
+|查询php71u是否安装|rpm -q php71u|
+|查看php71u包信息|rpm -qi php71u|
+|列出php71u包含的文件|rpm -ql php71u|
+|查看filename属于哪个rpm包|rpm -qf filename|
