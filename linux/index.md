@@ -1,11 +1,13 @@
 ### 文件类型
-1. - 普通文件
-2. d 目录 
-3. c 字符设备文件
-4. b 块设备文件
-5. s 套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了
-6. p 管道
-7. l 符号链接文件
+| 字符 | 描述 |
+|----|----|
+| \- |普通文件|
+| d |目录|
+| c |字符设备文件|
+| b |块设备文件|
+| s |套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了|
+| p |管道|
+| l |符号链接文件|
 
 ***
 
@@ -22,17 +24,22 @@ systemctl (start|restart|stop|status) nginx
 ***
 
 ### 网络(nat + hostonly)
+nmcli, 一个设备可以对应多个连接
 
 | 命令  |  描述 |
 |------|------|
-|nmcli d|查看设备|
+|nmcli d|查看所有设备|
 |nmcli c|查看所有连接|
 |nmcli c show static|查看static这个连接|
-|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|添加一个连接,加上ip4则bootproto改为静态|
+|nmcli c add con-name dhcp type ethernet ifname enp0s3|添加一个dhcp连接|
+|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|添加dhcp连接|
 |nmcli c mod static ipv4.addresses 192.168.56.20/24|改连接，通过show列出的属性进行设置|
 |nmcli c static up|启动static连接|
+|nmcli c static down|关闭static连接|
 
-natstat命令
+***
+
+### natstat命令
 1. netstat -a ()
 
 
