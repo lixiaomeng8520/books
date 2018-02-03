@@ -22,14 +22,14 @@ systemctl (start|restart|stop|status) nginx
 ***
 
 ### 网络(nat + hostonly)
-nmcli
-|命令|描述|
-|----|----|
+
+| 命令  |  描述 |
+|------|------|
 |nmcli d|查看设备|
 |nmcli c|查看所有连接|
 |nmcli c show static|查看static这个连接|
-|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|添加一个连接,加上ip4则bootproto改为静态)|
-|nmcli c mod static ipv4.addresses 192.168.56.20/24|改连接，通过show列出的属性进行设置
+|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|添加一个连接,加上ip4则bootproto改为静态|
+|nmcli c mod static ipv4.addresses 192.168.56.20/24|改连接，通过show列出的属性进行设置|
 |nmcli c static up|启动static连接|
 
 natstat命令
