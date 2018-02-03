@@ -26,16 +26,16 @@ systemctl (start|restart|stop|status) nginx
 ### 网络(nat + hostonly)
 nmcli, 一个设备可以对应多个连接
 
-| 命令  |  描述 |
+| 描述  | 命令 |
 |------|------|
-|nmcli d|查看所有设备|
-|nmcli c|查看所有连接|
-|nmcli c show static|查看static这个连接|
-|nmcli c add con-name dhcp type ethernet ifname enp0s3|添加一个dhcp连接|
-|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|添加dhcp连接|
-|nmcli c mod static ipv4.addresses 192.168.56.20/24|改连接，通过show列出的属性进行设置|
-|nmcli c static up|启动static连接|
-|nmcli c static down|关闭static连接|
+|查看所有设备|nmcli d|
+|查看所有连接|nmcli c|
+|查看static这个连接|nmcli c show static|
+|添加dhcp连接|nmcli c add con-name dhcp type ethernet ifname enp0s3|
+|添加static连接|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|
+|修改连接属性，参考show属性|nmcli c mod static ipv4.addresses 192.168.56.20/24|
+|启动static连接|nmcli c up static|
+|关闭static连接|nmcli c down static|
 
 ***
 
