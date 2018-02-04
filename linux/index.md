@@ -26,8 +26,8 @@ systemctl (start|restart|stop|status) nginx
 ### 网络(nat + hostonly)
 nmcli, 一个设备可以对应多个连接
 
-| 描述  | 命令 |
-|------|------|
+|描述|命令|
+|----|----|
 |查看所有设备|nmcli d|
 |查看所有连接|nmcli c|
 |查看static这个连接|nmcli c show static|
@@ -37,8 +37,18 @@ nmcli, 一个设备可以对应多个连接
 |启动static连接|nmcli c up static|
 |关闭static连接|nmcli c down static|
 
-natstat命令
-1. netstat -a ()
+netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外它还能列出处于监听状态（即等待接入请求）的套接字。
+
+|描述|命令|
+|----|----|
+|列出所有|netstat -a|
+|列出tcp|netstat -at|
+|列出udp|netstat -au|
+|禁用域名解析|netstat -ant|
+|*监听中的连接|netstat -ntl|
+|获取进程名|netstat -ntlp|
+|获取进程用户|netstat -ntlpe|
+|获取内核路由|netstat -nr|
 
 ***
 
