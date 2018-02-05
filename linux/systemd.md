@@ -1,4 +1,6 @@
 ### 命令
+|描述|命令|
+|----|----|
 |管理系统|systemctl|
 |启动耗时|systemd-analyze|
 |主机的信息|hostnamectl|
@@ -13,7 +15,8 @@
 |重启|systemctl reboot|
 
 ### Systemd 可以管理所有系统资源。不同的资源统称为 Unit
-
+|描述|类型|
+|----|----|
 |系统服务|Service|
 |多个Unit构成的一个组|Target|
 |硬件设备|Device|
@@ -28,7 +31,8 @@
 |定时器|Timer|
 
 ### unit管理
-
+|描述|命令|
+|----|----|
 |正在运行unit|systemctl list-units|
 |所有unit|systemctl list-units --all|
 |类型为service,正在运行|systemctl list-units --type=service|
@@ -44,6 +48,7 @@
 
 ### 配置文件
 /etc/systemd/system/ -> /usr/lib/systemd/system/
-
+|描述|命令|
+|----|----|
 |列出unit files|systemctl list-unit-files --type=service|
 |列出单个unit files|systemctl list-unit-files smb.service|
