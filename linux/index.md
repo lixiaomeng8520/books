@@ -28,8 +28,12 @@ systemctl (start|restart|stop|status) nginx
 
 ***
 
-### 网络(nat + hostonly)
-nmcli, 一个设备可以对应多个连接
+### 网络
+virtualbox采用nat+hostonly模式，nat用来上网，hostonly用来构建内部网络。
+centos按照顺序加载网卡配置文件，所以先配置nat后配置hostonly的话，hostonly不要写网关，否则会覆盖掉nat。
+TODO：先配置hostonly后配置nat。
+
+nmcli命令
 
 |描述|命令|
 |----|----|
