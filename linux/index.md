@@ -1,17 +1,22 @@
+### 注意
+setenforce 0
+
+***
+
 ### 文件类型
 | 字符 | 描述 |
 |----|----|
 | \- |普通文件|
-| d |目录|
-| c |字符设备文件|
-| b |块设备文件|
-| s |套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了|
-| p |管道|
-| l |符号链接文件|
+| d  |目录|
+| c  |字符设备文件|
+| b  |块设备文件|
+| s  |套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了|
+| p  |管道|
+| l  |符号链接文件|
 
 ***
 
-### 守护进程
+### 守护进程(TODO)
 systemctl (start|restart|stop|status) nginx
 
 ***
@@ -67,3 +72,11 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 |查看php71u包信息|rpm -qi php71u|
 |列出php71u包含的文件|rpm -ql php71u|
 |查看filename属于哪个rpm包|rpm -qf filename|
+
+***
+
+### samba
+1. yum install -y samba
+2. smbpasswd -a lxm (添加一个linux用户,并输入密码)
+3. systemctl start smb
+4. 直接可以访问home目录,win: \\192.168.56.20\lxm
