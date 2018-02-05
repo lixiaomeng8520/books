@@ -8,11 +8,15 @@
 |时间设置|timedatectl|
 |登录的用户|loginctl|
 
+***
+
 ### 电源
 |描述|命令|
 |----|----|
 |关机|systemctl poweroff|
 |重启|systemctl reboot|
+
+***
 
 ### Systemd 可以管理所有系统资源。不同的资源统称为 Unit
 |描述|类型|
@@ -30,6 +34,8 @@
 |swap文件|Swap|
 |定时器|Timer|
 
+***
+
 ### unit管理
 |描述|命令|
 |----|----|
@@ -46,8 +52,11 @@
 |开机启动|systemctl enable nginx|
 |开机不启动|systemctl disable nginx|
 
+***
+
 ### 配置文件
 /etc/systemd/system/ -> /usr/lib/systemd/system/
+
 |描述|命令|
 |----|----|
 |列出unit files|systemctl list-unit-files --type=service|
