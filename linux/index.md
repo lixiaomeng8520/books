@@ -3,6 +3,11 @@ setenforce 0
 
 ***
 
+### 常用工具软件包
+1. net-tools
+
+***
+
 ### 文件类型
 | 字符 | 描述 |
 |----|----|
@@ -16,8 +21,7 @@ setenforce 0
 
 ***
 
-### 守护进程(TODO)
-systemctl (start|restart|stop|status) nginx
+### [systemd](systemd.md)
 
 ***
 
