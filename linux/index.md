@@ -1,15 +1,21 @@
-### 注意
+## 注意
+
 1. setenforce 0
 2. 用户U在查看有读权限的文件F时, U必须对F的目录有可执行权限, 否则提示权限不够.
 
 ***
 
-### 常用工具软件包
+## 常用工具软件包
+
 1. net-tools
+2. git2u (ius)
+3. php71u-fpm (ius)
+4. nginx (epel)
+5. subversion (centos/updates)
 
 ***
 
-### 文件类型
+## 文件类型
 | 字符 | 描述 |
 |----|----|
 | \- |普通文件|
@@ -22,18 +28,19 @@
 
 ***
 
-### [systemd](systemd.md)
+## [systemd](systemd.md)
 
 ***
 
-### centos7 uefi无法引导问题
+## centos7 uefi无法引导问题
 1. 重新启动安装盘，进入rescure模式
 2. cd /mnt/sysimage/boot/efi/EFI
 3. cp centos/grubx64.efi BOOT/
 
 ***
 
-### 网络
+## 网络
+
 virtualbox采用nat+hostonly模式，nat用来上网，hostonly用来构建内部网络。
 centos按照顺序加载网卡配置文件，所以先配置nat后配置hostonly的话，hostonly不要写网关，否则会覆盖掉nat。
 TODO：先配置hostonly后配置nat。
@@ -66,7 +73,8 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 
 ***
 
-### 安装仓库
+## 安装仓库
+
 |描述|命令|
 |----|----|
 |epel|yum -y install epel-release|
@@ -74,17 +82,20 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 
 ***
 
-### 软件包
+## 软件包
+
 |描述|命令|
 |----|----|
-|查询php71u是否安装|rpm -q php71u|
-|查看php71u包信息|rpm -qi php71u|
-|列出php71u包含的文件|rpm -ql php71u|
+|查看一个包的依赖|yum deplist php71u-cli|
+|查询php71u是否安装|rpm -q php71u-fpm|
+|查看php71u包信息|rpm -qi php71u-fpm|
+|列出php71u包含的文件|rpm -ql php71u-fpm|
 |查看filename属于哪个rpm包|rpm -qf filename|
 
 ***
 
-### samba
+## samba
+
 1. yum install -y samba
 2. smbpasswd -a lxm (添加一个linux用户,并输入密码)
 3. systemctl start smb
@@ -92,6 +103,20 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 
 ***
 
-### nginx
+## nginx
 
 1. fastcgi.conf比fastcgi_params多了一行SCRIPT_FILENAME, 应该使用前者。[参考](https://blog.martinfjordvald.com/2013/04/nginx-config-history-fastcgi_params-versus-fastcgi-conf/)
+
+***
+
+## php
+
+### 通过ius安装的php71u
+
+1. yum install -y php71u-fpm (依赖: php71u-common)
+2. --with-config-file-path=/etc/php.ini 和 --with-config-file-scan-dir php=/etc/php.d 配置文件指定在编译时的参数里
+3. php71u-common 包含文件
+    1. /etc/php.ini (主配置文件)
+    2. /etc/php.d/* (各模块配置文件)
+    3. /usr/lib64/php/modules/*.so (模块so文件)
+4. php71u-mysqlnd 里包含了mysqlnd, mysqli, pdo_mysql
