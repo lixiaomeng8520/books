@@ -7,6 +7,8 @@
 
 ## 常用工具软件包
 
+[pkgs](https://pkgs.org) 很全的软件包网站
+
 1. net-tools
 2. git2u (ius)
 3. php71u-fpm (ius)
@@ -103,9 +105,7 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 
 ***
 
-## nginx
-
-1. fastcgi.conf比fastcgi_params多了一行SCRIPT_FILENAME, 应该使用前者。[参考](https://blog.martinfjordvald.com/2013/04/nginx-config-history-fastcgi_params-versus-fastcgi-conf/)
+## [nginx](nginx.md)
 
 ***
 
@@ -114,9 +114,11 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 ### 通过ius安装的php71u
 
 1. yum install -y php71u-fpm (依赖: php71u-common)
-2. --with-config-file-path=/etc/php.ini 和 --with-config-file-scan-dir php=/etc/php.d 配置文件指定在编译时的参数里
+2. --with-config-file-path=/etc/php.ini 和 --with-config-file-scan-dir=/etc/php.d 配置文件指定在编译时的参数里
 3. php71u-common 包含文件
     1. /etc/php.ini (主配置文件)
     2. /etc/php.d/* (各模块配置文件)
     3. /usr/lib64/php/modules/*.so (模块so文件)
 4. php71u-mysqlnd 里包含了mysqlnd, mysqli, pdo_mysql
+5. php71u-cli 提供可执行文件php, phpize等
+6. 基本都依赖php71u-common, 里面应该包含php主程序
