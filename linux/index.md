@@ -1,5 +1,6 @@
 ### 注意
-setenforce 0
+1. setenforce 0
+2. 用户U在查看有读权限的文件F时, U必须对F的目录有可执行权限, 否则提示权限不够.
 
 ***
 
@@ -88,3 +89,9 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 2. smbpasswd -a lxm (添加一个linux用户,并输入密码)
 3. systemctl start smb
 4. 直接可以访问home目录,windows: \\\\192.168.56.20\lxm
+
+***
+
+### nginx
+
+1. fastcgi.conf比fastcgi_params多了一行SCRIPT_FILENAME, 应该使用前者。[参考](https://blog.martinfjordvald.com/2013/04/nginx-config-history-fastcgi_params-versus-fastcgi-conf/)
