@@ -1,0 +1,1 @@
+[https://www.tecmint.com/multiple-centos-installations-using-kickstart/](https://www.tecmint.com/multiple-centos-installations-using-kickstart/)

@@ -1,10 +1,19 @@
+## 参考文章
+
+1. [简明 Nginx Location Url 配置笔记](https://www.jianshu.com/p/e154c2ef002f)
+2. [FASTCGI_PARAMS VERSUS FASTCGI.CONF – NGINX CONFIG HISTORY](https://blog.martinfjordvald.com/2013/04/nginx-config-history-fastcgi_params-versus-fastcgi-conf/)
+3. [How to Install Nginx on CentOS 7](https://www.tecmint.com/install-nginx-on-centos-7/)
+
 ## nginx配置php
+
+这里nginx如果报primary...什么的, 应该是对该文件没有访问权限. 要检查这个文件的父目录们, 需要有x权限.
 
 ```nginx
 server {
     listen 80;
     server_name test.lxm.cn;
     index index.html index.php;
+    root /home/lxm/workspace/php/test;
 
     location ~ \.php$ {
         fastcgi_pass 127.0.0.1:9000;
@@ -16,7 +25,7 @@ server {
 ## nginx location规则
 
 ### 语法:
-1. location [ = | ~ | ~* | ^~ ] uri { ... }
+1. location [ = | ~ | ~\* | \^~ ] uri { ... }
 2. location @name { ... }
 
 ### 匹配模式
@@ -30,12 +39,12 @@ server {
 |4|正常匹配|location /demo {}   |否|是||
 |5|全匹配|location / {}|是|否||
 
-1. 首先遵循大的优先级
-2. 同级别内
-    1. 正则匹配成功之后停止匹配，非正则匹配成功还会接着匹配
-    2. 在所有匹配成功的url中，选取匹配度最大的url字符地址
+1. 首先遵循大的优先级.
+2. 同级别内.
+    1. 正则匹配成功之后停止匹配，非正则匹配成功还会接着匹配.
+    2. 在所有匹配成功的url中，选取匹配度最大的url字符地址.
 
 
 ## 杂项
 
-1. fastcgi.conf比fastcgi_params多了一行SCRIPT_FILENAME, 应该使用前者。[参考](https://blog.martinfjordvald.com/2013/04/nginx-config-history-fastcgi_params-versus-fastcgi-conf/)
+1. fastcgi.conf比fastcgi_params多了一行SCRIPT_FILENAME, 应该使用前者.
