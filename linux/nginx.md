@@ -25,7 +25,7 @@ server {
 ## nginx location规则
 
 ### 语法:
-1. location [ = | ~ | ~\* | \^~ ] uri { ... }
+1. location [ = | ~ | ~\* | ^\~ ] uri { ... }
 2. location @name { ... }
 
 ### 匹配模式
