@@ -32,8 +32,13 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 |获取进程用户|netstat -ntlpe|
 |获取内核路由|netstat -nr|
 
+## route
+
+route -n
+
 ## virtualbox
 
 1. virtualbox采用nat+hostonly模式, nat用来上网, hostonly用来构建内部网络.
 2. centos按照顺序加载网卡配置文件, 所以先配置nat后配置hostonly的话，hostonly不要写网关, 否则会覆盖掉nat.
 3. TODO: 先配置hostonly后配置nat.
+4. hostonly相当于各主机通过双绞线相连.
