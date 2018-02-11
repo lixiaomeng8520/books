@@ -8,11 +8,11 @@
 7. [DHCP原理及配置](http://blog.51cto.com/minux/1714849)
 8. [DHCP 详解](https://www.cnblogs.com/happygirl-zjj/p/5976526.html)
 
-## 工作原理
+## 设置 PXE Network Boot Server
+
+### 工作原理
 
 ![](http://s3.51cto.com/wyfs02/M00/5D/ED/wKiom1Una-azSpD7AAJNpGK8Xr0132.jpg)
-
-## 设置 PXE Network Boot Server
 
 ### 工具
 
@@ -22,7 +22,7 @@
 
 ### 步骤
 
-1. DNSMASQ服务器
+#### 1. DNSMASQ服务器
 
 安装
 
@@ -60,19 +60,19 @@ systemctl start dnsmasq
 systemctl enable dnsmasq
 ```
 
-2. 安装syslinux
+#### 2. 安装syslinux
 
 ```bash
 yum install syslinux
 ```
 
-3. 将syslinux文件复制到tftp根目录下
+#### 3. 将syslinux文件复制到tftp根目录下
 
 ```bash
 cp -r /usr/share/syslinux/* /var/tftp/
 ```
 
-4. 设置PXE服务配置文件
+#### 4. 设置PXE服务配置文件
 
 pxe服务器默认读取一系列文件(1. GUID文件, 2. MAC文件. 3. Default文件), 这些文件在pxelinux.cfg这个目录里, pxelinux.cfg的路径由DNSMASQ配置文件里tftp-root指定.
 
@@ -98,7 +98,7 @@ kernel centos7/vmlinuz
 append initrd=centos7/initrd.img method=ftp://192.168.57.20/pub devfs=nomount
 ```
 
-5. 将centos7镜像复制到pxe server
+#### 5. 将centos7镜像复制到pxe server
 
 ```bash
 mount -o loop /dev/cdrom /mnt
@@ -107,7 +107,7 @@ cp /mnt/images/pxeboot/vmlinuz /var/tftp/centos7/
 cp /mnt/images/pxeboot/initrd.img /var/tftp/centos7/
 ```
 
-6. 镜像源
+#### 6. 镜像源
 
 ```bash
 yum install vsftpd
@@ -116,8 +116,13 @@ systemctl start vsftpd
 systemctl enable vsftpd
 ```
 
-7. 查看日志
+#### 7. 查看日志
 
 ```bash
 tail -f /var/log/messages
 ```
+
+## centos7 uefi无法引导问题
+1. 重新启动安装盘，进入rescure模式
+2. cd /mnt/sysimage/boot/efi/EFI
+3. cp centos/grubx64.efi BOOT/

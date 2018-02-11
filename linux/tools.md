@@ -14,6 +14,7 @@
 |添加dhcp连接|nmcli c add con-name dhcp type ethernet ifname enp0s3|
 |添加static连接|nmcli c add con-name static type ethernet ifname enp0s3 ip4 192.168.56.20/24 gw4 192.168.56.1|
 |修改连接属性，参考show属性|nmcli c mod static ipv4.addresses 192.168.56.20/24|
+|修改连接为静态连接|nmcli c mod static ipv4.method manual|
 |启动static连接|nmcli c up static|
 |关闭static连接|nmcli c down static|
 
@@ -42,3 +43,14 @@ route -n
 2. centos按照顺序加载网卡配置文件, 所以先配置nat后配置hostonly的话，hostonly不要写网关, 否则会覆盖掉nat.
 3. TODO: 先配置hostonly后配置nat.
 4. hostonly相当于各主机通过双绞线相连.
+
+## 文件类型
+| 字符 | 描述 |
+|----|----|
+| \- |普通文件|
+| d  |目录|
+| c  |字符设备文件|
+| b  |块设备文件|
+| s  |套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了|
+| p  |管道|
+| l  |符号链接文件|
