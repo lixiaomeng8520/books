@@ -42,23 +42,20 @@ yum install firewalld
 ## 命令
 
 ```bash
+firewall-cmd --state # 状态
+* firewall-cmd --reload # 重载配置
+
 firewall-cmd --get-zones # 获取所有zone名称
 firewall-cmd --get-default-zone # 获取默认zone
 firewall-cmd --list-all-zones # 列出所有zone, 以及zone里面的配置信息
 * firewall-cmd --zone=public --list-all
 firewall-cmd --set-default-zone=public # 设置默认zone
-firewall-cmd --get-icmptypes # 获取支持的icmp类型
+
 * firewall-cmd --get-services # 获取所有服务
 ls /usr/lib/firewalld/services # 列出系统所有默认自带服务
-* firewall-cmd --reload # 重载配置
-firewall-cmd --state # 状态
-firewall-cmd --get-active-zones # 获取激活的zone
-firewall-cmd --get-service # 获取默认网卡区域的服务
-firewall-cmd --add-service=rtmp # 默认区域添加临时服务
-firewall-cmd --zone=public --add-service=rtmp # 指定区域添加临时服务
+
+firewall-cmd --zone=public --add-service=rtmp # 指定区域添加临时服务, 不写--zone, 则是默认zone
 * firewall-cmd --zone=public --add-service=rtmp --permanent # 指定区域添加永久服务
-firewall-cmd --permanent --add-source=192.168.0.0/24 # 添加一个网段来源IP
-firewall-cmd --permanent --add-port=1935/tcp # 添加一个tcp端口
 ```
 
 ## 添加自定义服务
