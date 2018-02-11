@@ -1,8 +1,0 @@
-1. [install](install.md)
-2. [package](package.md)
-3. [systemd](systemd.md)
-4. [samba](samba.md)
-5. [nginx](nginx.md)
-6. [php](php.md)
-7. [tools](tools.md)
-8. [net](net.md)
