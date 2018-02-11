@@ -1,10 +1,13 @@
+## 参考
+
+1. [网络传输中的三张表，MAC地址表、ARP缓存表以及路由表详解](https://www.jianshu.com/p/63fd0faa47da)
+
 ## 交换机
 
 本质需要每次连接都需要修改源MAC和目标MAC
 
 1. 两层: MAC
 2. 三层: IP
-
 
 ## 数据包请求流程
 
@@ -16,9 +19,11 @@
 6. A网关收到数据包后查看，根据目的IP（B的IP地址）查找路由表，找到通往目的网段的路由及下一跳，得到下一跳的MAC地址（ARP获得的），然后将数据包中原IP、目的IP保持不变，原MAC地址换成A网关的MAC地址，目的地址换成下一跳的MAC地址，转发到下一跳的设备（路由器，三层交换机等）。
 7. 如果下一跳就是B的网关（不是B的网关，就重复上面的动作），网关收到后查看，发现目的IP在自己的内部（ARP表），将数据包中原IP、目的IP保持不变，原MAC地址换成B网关的MAC地址，目的地址换成B的MAC地址，将数据包发给B，B得到数据包后，完成A与B的通信。
 
-## hostonly
+## virtualbox
 
-1. 一个interface(界面)相当于一个独立的物理网络.
+1. hostonly相当于各主机通过双绞线相连, 一个interface(界面)相当于一个交换机, 可以构成独立的物理网络.
 2. 一个主机需要选择一个interface进行连接.
 3. 连接两个interface的主机可以做路由, 连接两个物理网络.
 4. 路由主机需要开启转发, echo 1 > /proc/sys/net/ipv4/ip_forward.
+5. virtualbox可以采用nat + hostonly模式, nat用来上网, hostonly用来构建内部网络.
+6. centos按照顺序加载网卡配置文件, 所以先配置nat后配置hostonly的话，hostonly不要写网关, 否则会覆盖掉nat.
