@@ -4,7 +4,7 @@
 2. git2u (ius)
 3. subversion (centos/updates)
 
-## nmcli
+## nmcli 命令
 
 |描述|命令|
 |----|----|
@@ -18,7 +18,7 @@
 |启动static连接|nmcli c up static|
 |关闭static连接|nmcli c down static|
 
-## netstat
+## netstat 命令
 
 netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外它还能列出处于监听状态（即等待接入请求）的套接字。
 
@@ -33,7 +33,7 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 |获取进程用户|netstat -ntlpe|
 |获取内核路由|netstat -nr|
 
-## route
+## route 命令
 
 显示本机路由表
 
