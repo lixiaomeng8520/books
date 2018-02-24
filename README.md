@@ -16,6 +16,7 @@
 14. [jenkins](jenkins/index.md)
 15. [elasticsearch](elasticsearch/index.md)
 16. [firewalld防火墙](firewalld.md)
+17. [vim编辑器](vim.md)
 
 #### 参考
 

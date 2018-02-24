@@ -3,6 +3,7 @@
 1. net-tools (base)
 2. git2u (ius)
 3. subversion (centos/updates)
+4. lrzsz (与当前windows进行文件上传下载)
 
 ## nmcli 命令
 
@@ -38,6 +39,13 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 显示本机路由表
 
 route -n
+
+## lrzsz
+
+rz, sz便是Linux/Unix同Windows进行ZModem文件传输的命令行工具
+
+1. rz (从windows receive接收文件)
+2. sz a.txt (send发送文件a.txt到windows)
 
 ## 文件类型
 
