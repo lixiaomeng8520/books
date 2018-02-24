@@ -56,6 +56,7 @@ ls /usr/lib/firewalld/services # 列出系统所有默认自带服务
 
 firewall-cmd --zone=public --add-service=rtmp # 指定区域添加临时服务, 不写--zone, 则是默认zone
 * firewall-cmd --zone=public --add-service=rtmp --permanent # 指定区域添加永久服务
+* firewall-cmd --zone=public --add-port=8001/tcp --permanent # 添加8001端口
 ```
 
 ## 添加自定义服务
