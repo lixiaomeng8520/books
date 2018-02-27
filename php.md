@@ -14,6 +14,7 @@ yum方式有很多仓库，比如ius, remi. 软件包都已经规划好目录, �
 2. /etc/php.d/* (各模块配置文件)
 3. /usr/lib64/php/modules/*.so (模块so文件)
 
+
 ## php-fpm
 
 ### 启动
@@ -37,15 +38,16 @@ php-fpm -c /etc/php.ini
 
 > 没有这些配置文件也可以启动
 
+
 ## composer
 
-## 1. 中国镜像
+### 1. 中国镜像
 
 ```bash
 php composer.phar config repo.packagist composer https://packagist.phpcomposer.com
 ```
 
-## 2. psr-4
+### 2. psr-4
 
 1. 一个前缀对应一个基准目录
 ```json
@@ -59,6 +61,31 @@ php composer.phar config repo.packagist composer https://packagist.phpcomposer.c
 ```
 2. autoload时, \lxm\hello 这样的类名会去掉最前面的 \, 然后和配置里的前缀进行对比, 找到基准目录, 然后后面的部分将 \ 转化为 /, 按照目录形式进行查找.
 3. composer实现了psr-0和psr-4两种autoload.
+
+
+## xdebug原理
+
+### 文档
+
+1. [官方文档](https://xdebug.org/docs/)
+2. [成为高级 PHP 程序员的第一步——调试（xdebug 原理篇）](https://laravel-china.org/articles/4090/the-first-step-to-becoming-a-senior-php-programmer-debugging-xdebug-principle)
+3. [成为高级 PHP 程序员的第一步——调试（xdebug 配置篇）](https://laravel-china.org/articles/4098/the-first-step-to-becoming-a-senior-php-programmer-debug-xdebug-configuration)
+
+### notice
+
+1. 路径映射
+
+xdebug向ide发送信息时, 是将执行脚本的路径(/home/lxm/workspace/php/test)发送给ide, ide是无法访问这个路径的, 因为它是服务器执行的路径, 所以必须指定一个ide可以访问的本地路径.
+
+如果ide和xdebug在一台机器上, 应该就不用指定了, 因为他们的路径是一样的.
+
+### SublimeTextXdebug
+
+[https://github.com/martomo/SublimeTextXdebug](https://github.com/martomo/SublimeTextXdebug)
+
+### vscode-php-debug
+
+[https://github.com/felixfbecker/vscode-php-debug](https://github.com/felixfbecker/vscode-php-debug)
 
 
 ## 一些框架
