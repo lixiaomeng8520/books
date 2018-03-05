@@ -61,6 +61,17 @@ php composer.phar config repo.packagist composer https://packagist.phpcomposer.c
 ```
 2. autoload时, \lxm\hello 这样的类名会去掉最前面的 \, 然后和配置里的前缀进行对比, 找到基准目录, 然后后面的部分将 \ 转化为 /, 按照目录形式进行查找.
 3. composer实现了psr-0和psr-4两种autoload.
+4. 如果一个类没有加命名空间，那么当它自动加载时，会自动加上当前命名空间。
+```php
+<?php
+namespace lxm;
+
+spl_autoload_register(function($class) {
+    var_dump($class); // class = lxm/B
+});
+
+$b = new B(); 
+```
 
 
 ## xdebug原理

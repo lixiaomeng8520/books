@@ -17,6 +17,7 @@
 15. [elasticsearch](elasticsearch/index.md)
 16. [firewalld防火墙](firewalld.md)
 17. [vim编辑器](vim.md)
+18. [vscode编辑器](vscode.md)
 
 #### 参考
 
