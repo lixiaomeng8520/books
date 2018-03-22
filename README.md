@@ -12,7 +12,7 @@
 10. [编辑器sublime](sublime/index.md)
 11. [深度学习TensorFlow](ai/index.md)
 12. [代码书写规范](code/index.md)
-13. [docker](docker/index.md)
+13. [docker](docker.md)
 14. [jenkins](jenkins/index.md)
 15. [elasticsearch](elasticsearch/index.md)
 16. [firewalld防火墙](firewalld.md)
