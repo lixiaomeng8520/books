@@ -73,7 +73,8 @@ vim /etc/docker/daemon.json
 
 ## 容器
 
-每运行一次image, 都会生成一个容器, 就算命令是一样的。
+每运行一次image, 都会生成一个容器, 就算命令是一样的.
 
+docker run 如果没有写命令, 则会执行Dockerfile里CMD的命令.
 
 

@@ -34,12 +34,6 @@ netstat 是一款命令行工具，可用于列出系统上所有的网络套接
 |获取进程用户|netstat -ntlpe|
 |获取内核路由|netstat -nr|
 
-## route 命令
-
-显示本机路由表
-
-route -n
-
 ## lrzsz
 
 rz, sz便是Linux/Unix同Windows进行ZModem文件传输的命令行工具
