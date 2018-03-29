@@ -7,3 +7,5 @@ set expandtab # tab转换为4个空格
 set autoindent # 自动缩进
 set encoding=utf-8 #设置默认编码
 ```
+
+2. 如果出现错乱行: set paste
