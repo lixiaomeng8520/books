@@ -32,7 +32,7 @@ vim /etc/docker/daemon.json
 }
 ```
 
-## 命令
+## 基础命令
 
 ### docker相关
 
@@ -47,9 +47,12 @@ vim /etc/docker/daemon.json
 |描述|命令|
 |-|-|
 |列出images|docker images|
-|搜索docker|docker search ubuntu|
+|给image打tag|docker tag ubuntu localhost:5000/my-ubuntu|
+|搜索docker|docker search ubuntu -> docker pull docker.io/library/ubuntu|
 |下载docker|docker pull ubuntu|
+|下载docker|docker pull myregistrydomain:port/foo/bar|
 |删除image|docker rmi ubuntu|
+|删除所有image|docker rmi $(docker images -q)|
 
 ### 容器相关
 
@@ -60,6 +63,7 @@ vim /etc/docker/daemon.json
 |创建容器|docker run ubuntu cat /etc/issue|
 |创建容器, 给容器命名|docker run --name myname ubuntu cat /etc/issue|
 |删除容器|docker rm c629b7d70666|
+|删除所有容器|docker rm $(docker ps -a -q)|
 |运行已创建容器|docker start c629b7d70666|
 |停止正在运行容器|docker stop c629b7d70666|
 |容器状态|docker stats myname|
@@ -70,11 +74,43 @@ vim /etc/docker/daemon.json
 |终止正在运行容器|docker kill c629b7d70666|
 |容器提交为image|docker commit container-name image-name|
 
+### docker run 相关参数
 
-## 容器
+|参数|描述|
+|-|-|
+|--restart|always, 容器退出时重启策略|
 
-每运行一次image, 都会生成一个容器, 就算命令是一样的.
 
-docker run 如果没有写命令, 则会执行Dockerfile里CMD的命令.
+## registry
+
+### 资料
+
+1. [Docker Registry](https://docs.docker.com/registry/)
+
+### 启动命令
+
+```bash
+# 自动启动
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+
+# 暴露端口
+docker run -d -p 5001:5000 --name registry-test registry:2
+
+# 定制内部端口 REGISTRY_HTTP_ADDR
+docker run -d -e REGISTRY_HTTP_ADDR=0.0.0.0:5001 -p 5001:5001 --name registry-test registry:2
+
+# 本地存储
+docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/var/lib/registry registry:2
+
+# 远程存储到aws等
+```
+
+
+
+
+## note
+
+1. 每运行一次image, 都会生成一个容器, 就算命令是一样的.
+2. image命名: ip/namespace/name
 
 

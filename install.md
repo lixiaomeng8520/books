@@ -46,8 +46,10 @@ bind-interfaces # 不考虑通配符
 # DHCP range-leases
 dhcp-range = 192.168.57.100,192.168.57.200,255.255.255.0, 1h
 
+dhcp-boot = pxelinux.0
+
 # 从dnsmasq的tftp服务器加载<tftp-root>/pxelinux.0
-pxe-service = x86PC, 'Install CentOS 7 from network server 192.168.57.20',pxelinux
+# pxe-service = x86PC, 'Install CentOS 7 from network server 192.168.57.20',pxelinux
 
 enable-tftp
 tftp-root = /var/tftp
