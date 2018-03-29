@@ -41,6 +41,7 @@ vim /etc/docker/daemon.json
 |列出所有命令|docker|
 |docker信息|docker info|
 |docker版本|docker version|
+|列出bridge的所有网络|docker network inspect bridge|
 
 ### image相关
 
