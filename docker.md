@@ -87,6 +87,7 @@ vim /etc/docker/daemon.json
 ### 资料
 
 1. [Docker Registry](https://docs.docker.com/registry/)
+2. [Automated Docker Deployment using Jenkins](http://www.tothenew.com/blog/automated-docker-deployment-using-jenkins/)
 
 ### 启动命令
 
@@ -107,6 +108,9 @@ docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/va
 ```
 
 
+## swarm
+
+1. [Swarm mode overview](https://docs.docker.com/engine/swarm/)
 
 
 ## note
@@ -115,3 +119,25 @@ docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/va
 2. image命名: ip/namespace/name
 
 
+## 试验
+
+```
+docker pull jenkins
+docker pull gitlab/gitlab-ce
+
+docker run -d -p 5000:5000 -p 5001:5001 --restart always --name registry -v /root/registry/config.yml:/etc/docker/registry/config.yml registry
+172.17.0.2
+http://admin:39e2dd0f48a93b0f233070b50a305b9e@172.17.0.3:8080/dockerregistry-webhook/notify
+
+docker run -d -p 8080:8080 -p 50000:50000 --restart always --name jenkins -v /root/jenkins/:/var/jenkins_home/ -v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v /etc/sysconfig/docker:/etc/sysconfig/docker -v /usr/bin/docker-current:/usr/bin/docker-current jenkins
+172.17.0.3
+012c446d4b024c71b641d5f4e301fb13
+
+bouncycastle
+
+docker run -d -p 8081:80 --restart always --name gitlab gitlab/gitlab-ce 
+172.17.0.4
+root babyhannah
+http://172.17.0.4/root/mydocker.git
+
+```

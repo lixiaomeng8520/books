@@ -41,6 +41,13 @@ rz, sz便是Linux/Unix同Windows进行ZModem文件传输的命令行工具
 1. rz (从windows receive接收文件)
 2. sz a.txt (send发送文件a.txt到windows)
 
+## curl
+
+|描述|命令|
+|-|-|
+|下载|curl -L url -o target|
+|POST|curl -X POST -H Content-Type:text/html url -d xxx|
+
 ## 文件类型
 
 | 字符 | 描述 |
