@@ -75,6 +75,11 @@ vim /etc/docker/daemon.json
 |终止正在运行容器|docker kill c629b7d70666|
 |容器提交为image|docker commit container-name image-name|
 
+### 网络
+
+|查看|docker network ls|
+|自定义|docker network create --subnet=172.18.0.0/16 mybridge|
+
 ### docker run 相关参数
 
 |参数|描述|
@@ -116,7 +121,8 @@ docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/va
 ## note
 
 1. 每运行一次image, 都会生成一个容器, 就算命令是一样的.
-2. image命名: ip/namespace/name
+2. image命名: ip/namespace/name.
+3. 默认网络不支持固定IP, 需要创建自定义网络.
 
 
 ## 试验
@@ -125,18 +131,21 @@ docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/va
 docker pull jenkins
 docker pull gitlab/gitlab-ce
 
-docker run -d -p 5000:5000 -p 5001:5001 --restart always --name registry -v /root/registry/config.yml:/etc/docker/registry/config.yml registry
-172.17.0.2
+
+
+docker run -d -p 5000:5000 -p 5001:5001 --restart always --name registry -v /root/registry/config.yml:/etc/docker/registry/config.yml --network mybridge --ip 172.18.0.2 registry
 http://admin:39e2dd0f48a93b0f233070b50a305b9e@172.17.0.3:8080/dockerregistry-webhook/notify
 
-docker run -d -p 8080:8080 -p 50000:50000 --restart always --name jenkins -v /root/jenkins/:/var/jenkins_home/ -v /usr/bin/docker:/usr/bin/docker -v /var/run/docker.sock:/var/run/docker.sock -v /etc/sysconfig/docker:/etc/sysconfig/docker -v /usr/bin/docker-current:/usr/bin/docker-current jenkins
-172.17.0.3
-012c446d4b024c71b641d5f4e301fb13
+docker run -d --restart always -p 8080:8080 -p 50000:50000 --group-add=`stat -c %g /var/run/docker.sock` --network mybridge --ip 172.18.0.3 --name jenkins -v /root/jenkins/:/var/jenkins_home/ -v /root/download/docker/docker:/usr/local/bin/docker -v /var/run/docker.sock:/var/run/docker.sock jenkins
+
+curl -L https://get.docker.com/builds/Linux/x86_64/docker-1.13.1.tgz -o docker.tgz
+tar -zxvf docker.tgz
+
 
 bouncycastle
 
-docker run -d -p 8081:80 --restart always --name gitlab gitlab/gitlab-ce 
-172.17.0.4
+docker run -d --restart always -p 8081:80 --name gitlab -v /root/gitlab/etc/gitlab:/etc/gitlab -v /root/gitlab/var/opt/gitlab:/var/opt/gitlab -v /root/gitlab/var/log/gitlab:/var/log/gitlab --network mybridge --ip 172.18.0.4 gitlab/gitlab-ce 
+172.18.0.4
 root babyhannah
 http://172.17.0.4/root/mydocker.git
 
