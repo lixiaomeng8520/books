@@ -149,4 +149,63 @@ docker run -d --restart always -p 8081:80 --name gitlab -v /root/gitlab/etc/gitl
 root babyhannah
 http://172.17.0.4/root/mydocker.git
 
+
+docker run -d --name mysql -v /root/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=111 --network mybridge --ip 172.18.0.5 mysql
+
+```
+
+```
+node {
+   stage('get source') {
+       git branch: 'master', credentialsId: 'fe220e94-9b54-44be-98d7-c3a532fe813a', url: 'git@172.18.0.4:root/dahecj_web.git'
+   }
+   stage('npm build') {
+        nodejs('node') {
+            sh 'cnpm install'
+            sh 'npm run build'
+        }
+   }
+    stage('docker build') {
+        git branch: 'master', credentialsId: 'fe220e94-9b54-44be-98d7-c3a532fe813a', url: 'git@172.18.0.4:root/mydocker.git'
+        sh 'cp -r dist dahecj_web/'
+        sh 'docker build -t 172.18.0.2:5000/lxm/dahecj_web --build-arg source=dist dahecj_web'
+        sh 'docker push 172.18.0.2:5000/lxm/dahecj_web'
+    }
+}
+
+node {
+    stage('pull') {
+        sh 'docker pull 172.18.0.2:5000/lxm/dahecj_web'
+    }
+    stage('stop old') {
+        sh 'docker rm -f dahecj_web'
+    }
+    stage('start new') {
+        sh 'docker run -d -p 7000:7000 --name dahecj_web 172.18.0.2:5000/lxm/dahecj_web'
+    }
+}
+```
+
+```
+curl -X POST http://172.17.0.1:2375/build -d "t=172.17.0.2%3a5000%2flxm%2fhello&remote=http%3a%2f%2froot%3ababyhannah%40172.17.0.4%2froot%2fhello.git"
+curl -X POST -H "X-Registry-Auth:ddd" http://172.17.0.1:2375/images/172.17.0.2%3a5000%2flxm%2fhello/push
+
+curl -X POST http://172.17.0.1:2375/images/create -d "fromImage=172.17.0.2%3a5000%2flxm%2fhello"
+
+curl -X DELETE http://172.17.0.1:2375/containers/hello?force=true
+
+curl -X POST -H "Content-Type: application/json" http://172.17.0.1:2375/containers/create?name=hello -d '{
+    "Image": "172.17.0.2:5000/lxm/hello",
+    "HostConfig": {
+        "PortBindings": {
+            "8082/tcp": [
+                {
+                    "HostPort": "80"
+                }   
+            ]
+        }
+    }
+}'
+
+curl -X POST http://172.17.0.1:2375/containers/hello/start
 ```
