@@ -2,6 +2,8 @@
 
 1. [Install Docker and Learn Basic Container Manipulation in CentOS and RHEL 7/6 – Part 1](https://www.tecmint.com/install-docker-and-learn-containers-in-centos-rhel-7-6/)
 2. [How to Install, Run and Delete Applications inside Docker Containers – Part 2](https://www.tecmint.com/install-run-and-delete-applications-inside-docker-containers/)
+3. [使用 Docker 部署 Ceph 集群](https://www.jianshu.com/p/f08ed7287416)
+4. [ceph/daemon]https://hub.docker.com/r/ceph/daemon/()
 
 ## 安装
 
@@ -123,6 +125,8 @@ docker run -d -p 5000:5000 --restart=always --name registry -v /mnt/registry:/va
 1. 每运行一次image, 都会生成一个容器, 就算命令是一样的.
 2. image命名: ip/namespace/name.
 3. 默认网络不支持固定IP, 需要创建自定义网络.
+4. --privileged=true 使用该参数，container内的root拥有真正的root权限。
+否则，container内的root只是外部的一个普通用户权限。
 
 
 ## 试验
@@ -209,3 +213,94 @@ curl -X POST -H "Content-Type: application/json" http://172.17.0.1:2375/containe
 
 curl -X POST http://172.17.0.1:2375/containers/hello/start
 ```
+
+```
+scp -r ~/ceph/ root@192.168.56.22:~
+
+
+docker run -d --net=host --name=mon \
+    -v /root/ceph/etc/ceph:/etc/ceph \
+    -v /root/ceph/var/lib/ceph:/var/lib/ceph \
+    -e MON_IP=192.168.56.21 \
+    -e CEPH_PUBLIC_NETWORK=192.168.56.0/24 \
+    -e MON_NAME=mon1 \
+    ceph/daemon mon
+
+docker run -d --net=host --name=mon \
+    -v /root/ceph/etc/ceph:/etc/ceph \
+    -v /root/ceph/var/lib/ceph:/var/lib/ceph \
+    -e MON_IP=192.168.56.22 \
+    -e CEPH_PUBLIC_NETWORK=192.168.56.0/24 \
+    -e MON_NAME=mon2 \
+    ceph/daemon mon
+
+docker run -d --net=host --name=mon \
+    -v /root/ceph/etc/ceph:/etc/ceph \
+    -v /root/ceph/var/lib/ceph:/var/lib/ceph \
+    -e MON_IP=192.168.56.24 \
+    -e CEPH_PUBLIC_NETWORK=192.168.56.0/24 \
+    -e MON_NAME=mon3 \
+    ceph/daemon mon
+
+
+docker run -d --net=host --name=osd \
+    --privileged=true --pid=host\
+    -v /root/ceph/etc/ceph:/etc/ceph \
+    -v /root/ceph/var/lib/ceph:/var/lib/ceph \
+    -v /dev/:/dev/ \
+    -e OSD_TYPE=disk \
+    -e OSD_DEVICE=/dev/sdb \
+    -e OSD_FORCE_ZAP=1 \
+    ceph/daemon osd
+
+
+docker run -d --net=host \
+-v /var/lib/ceph/:/var/lib/ceph/ \
+-v /etc/ceph:/etc/ceph \
+-e CEPHFS_CREATE=1 \
+ceph/daemon mds
+
+
+
+docker exec mon ceph -s
+
+```
+
+```
+cat << EOM > /etc/yum.repos.d/ceph.repo
+[ceph-noarch]
+name=Ceph noarch packages
+baseurl=https://download.ceph.com/rpm-luminous/el7/noarch
+enabled=1
+gpgcheck=1
+type=rpm-md
+gpgkey=https://download.ceph.com/keys/release.asc
+EOM
+```
+
+## ceph
+
+集群
+
+|描述|命令|
+|-|-|
+|集群状态|ceph -s; ceph status|
+|磁盘信息|ceph df|
+
+mon
+
+|描述|命令|
+|-|-|
+|mon状态|ceph mon stat; ceph mon dump|
+|mon的选举状态|ceph quorum_status|
+|mon的映射信息|ceph mon dump|
+|删除一个mon节点|ceph mon remove cs1|
+|获得一个正在运行的mon map 保存在1.txt文件中|ceph mon getmap -o 1.txt|
+|读取上面获得的map|monmaptool --print 1.txt |
+
+osd
+
+|描述|命令|
+|-|-|
+|osd列表|ceph osd tree|
+|删除osd|ceph osd rm 0|
