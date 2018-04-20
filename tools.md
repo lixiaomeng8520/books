@@ -48,6 +48,13 @@ rz, sz便是Linux/Unix同Windows进行ZModem文件传输的命令行工具
 |下载|curl -L url -o target|
 |POST|curl -X POST -H Content-Type:text/html url -d xxx|
 
+## ssh
+
+|描述|命令|
+|-|-|
+|生成密钥|ssh-keygen -t rsa|
+|拷贝公钥|ssh-copy-id root@master; ssh-copy-id -i ~/.ssh/id_rsa.pub root@master|
+
 ## 文件类型
 
 | 字符 | 描述 |
