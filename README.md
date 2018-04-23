@@ -15,9 +15,9 @@
 
 #### 服务
 
-1. [systemd服务](systemd.md)
-2. [samba服务](samba.md)
-3. [firewalld防火墙](firewalld.md)
+1. [systemd](systemd.md)
+2. [samba](samba.md)
+3. [firewalld](firewalld.md)
 
 
 #### 开发
@@ -30,6 +30,6 @@
 
 #### 编辑器
 
-1. [编辑器sublime](sublime/index.md)
-2. [vim编辑器](vim.md)
-3. [vscode编辑器](vscode.md)
+1. [sublime](sublime/index.md)
+2. [vim](vim.md)
+3. [vscode](vscode.md)
