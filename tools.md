@@ -1,10 +1,3 @@
-## 常用工具软件包
-
-1. net-tools (base)
-2. git2u (ius)
-3. subversion (centos/updates)
-4. lrzsz (与当前windows进行文件上传下载)
-
 ## nmcli 命令
 
 |描述|命令|
@@ -55,14 +48,12 @@ rz, sz便是Linux/Unix同Windows进行ZModem文件传输的命令行工具
 |生成密钥|ssh-keygen -t rsa|
 |拷贝公钥|ssh-copy-id root@master; ssh-copy-id -i ~/.ssh/id_rsa.pub root@master|
 
-## 文件类型
+## 软件包
 
-| 字符 | 描述 |
+|描述|命令|
 |----|----|
-| \- |普通文件|
-| d  |目录|
-| c  |字符设备文件|
-| b  |块设备文件|
-| s  |套接口文件 如我们开启MySQL服务后，在/var/lib/mysql/下生成的mysql.sock文件，关闭MySQL服务后，这个文件就消失了|
-| p  |管道|
-| l  |符号链接文件|
+|查看一个包的依赖|yum deplist php71u-cli|
+|查询php71u是否安装|rpm -q php71u-fpm|
+|查看php71u包信息|rpm -qi php71u-fpm|
+|列出php71u包含的文件|rpm -ql php71u-fpm|
+|查看filename属于哪个rpm包|rpm -qf filename|
